@@ -1,13 +1,16 @@
 import os
 
-import pymongo
+import ariadne_npdb
 
 
 class Base(dict):
-    def __init__(self, db=None, collection=None):
-        self.db = db
-        self.collection = collection or os.environ
+    def __init__(self, db=None, collection='phys'):
+        self._db = db
+        self.collection = collection
         self.model_name = self.__class__.__name__.lower()
+
+    def db(self):
+        return self._db or ariadne_npdb.DB
 
     @property
     def _root(self):
@@ -16,12 +19,6 @@ class Base(dict):
     @property
     def model(self):
         return getattr(self._root, self.model_name)
-
-    def connect(self, host, database, auth=None, port=27017, ssl=True):
-        mc = pymongo.MongoClient(host, port=port, ssl=ssl)
-        self.db = getattr(mc, database)
-        if auth:
-            self.db.authenticate(auth['username'], auth['password'])
 
     def save(self, **kwargs):
         if not self.db:
