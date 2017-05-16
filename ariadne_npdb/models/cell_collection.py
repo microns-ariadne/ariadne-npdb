@@ -1,4 +1,4 @@
-from ariadne_npdb.client import Base
+from ariadne_npdb.models import Base
 
 
 class CellCollection(Base):
