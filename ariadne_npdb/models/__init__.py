@@ -9,6 +9,7 @@ class Base(dict):
         self.collection = collection
         self.model_name = self.__class__.__name__.lower()
 
+    @property
     def db(self):
         return self._db or ariadne_npdb.DB
 
