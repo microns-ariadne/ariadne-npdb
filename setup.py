@@ -23,7 +23,7 @@ TEST_REQ = [
 
 
 setup(
-    name='ariadne_npdb',
+    name='ariadne-npdb',
     version=VERSION,
     packages=find_packages(),
     description='ARIADNE Neurophysiology database for MICrONS project',
